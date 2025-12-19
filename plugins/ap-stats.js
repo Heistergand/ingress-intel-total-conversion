@@ -6,8 +6,6 @@
 
 /* exported setup, changelog --eslint */
 
-// contributor: Heistergand
-
 var changelog = [
   {
     version: '0.4.6',
@@ -80,6 +78,7 @@ window.plugin.compAPStats.update = function (hasFinished) {
       `Destroy and capture ${data.destroyPortals} portals\n` +
       `Destroy ${data.destroyLinks} links and ${data.destroyFields} fields\n` +
       `Capture ${data.capturePortals} neutral portals, complete ${data.finishPortals} portals\n` +
+      `Reclaim ${data.reclaimPortals} machina portals\n` +
       `(unknown additional AP for links/fields)`;
     return `<tr><td>${team}</td><td style="text-align:right" title="${title}">${window.digits(data.AP)}</td></tr>`;
   };
@@ -91,8 +90,8 @@ window.plugin.compAPStats.update = function (hasFinished) {
 
 window.plugin.compAPStats.compAPStats = function () {
   var result = {
-    res: { AP: 0, destroyPortals: 0, capturePortals: 0, finishPortals: 0, destroyLinks: 0, destroyFields: 0 },
-    enl: { AP: 0, destroyPortals: 0, capturePortals: 0, finishPortals: 0, destroyLinks: 0, destroyFields: 0 },
+    res: { AP: 0, destroyPortals: 0, capturePortals: 0, finishPortals: 0, destroyLinks: 0, destroyFields: 0, reclaimPortals: 0 },
+    enl: { AP: 0, destroyPortals: 0, capturePortals: 0, finishPortals: 0, destroyLinks: 0, destroyFields: 0, reclaimPortals: 0 },
   };
 
   var displayBounds = window.map.getBounds();
