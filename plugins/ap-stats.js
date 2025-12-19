@@ -116,7 +116,6 @@ window.plugin.compAPStats.compAPStats = function () {
 
     // AP to destroy this portal
     var destroyAp = (data.resCount || 0) * window.DESTROY_RESONATOR;
-
     if (portal.options.team === window.TEAM_ENL) {
       result.res.AP += destroyAp + PORTAL_FULL_DEPLOY_AP;
       result.res.destroyPortals++;
@@ -131,12 +130,13 @@ window.plugin.compAPStats.compAPStats = function () {
         result.res.AP += completePortalAp;
         result.res.finishPortals++;
       }
+    } else if (portal.options.team === window.TEAM_MAC) {
+      // it's a machina portal, destroy AP for both teams.
+      result.enl.AP += destroyAp + PORTAL_FULL_DEPLOY_AP;
+      result.res.AP += destroyAp + PORTAL_FULL_DEPLOY_AP;
+      result.res.destroyPortals++;
+      result.enl.destroyPortals++;
     } else {
-      if (portal.options.team === window.TEAM_MAC) {
-        // it's a machina portal, destroy AP for both teams.
-        result.enl.AP += destroyAp;
-        result.res.AP += destroyAp;
-      }
       // it's a neutral or machina portal, potential for both teams.
       result.enl.AP += PORTAL_FULL_DEPLOY_AP;
       result.enl.capturePortals++;
