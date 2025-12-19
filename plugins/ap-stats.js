@@ -1,12 +1,18 @@
 // @author         Hollow011
 // @name           Available AP statistics
 // @category       Info
-// @version        0.4.5
+// @version        0.4.6
 // @description    Displays the per-team AP gains available in the current view.
 
 /* exported setup, changelog --eslint */
 
+// contributor: Heistergand
+
 var changelog = [
+  {
+    version: '0.4.6',
+    changes: ['Take Machina into account'],
+  },
   {
     version: '0.4.5',
     changes: ['Refactoring: fix eslint'],
@@ -126,7 +132,12 @@ window.plugin.compAPStats.compAPStats = function () {
         result.res.finishPortals++;
       }
     } else {
-      // it's a neutral portal, potential for both teams.  by definition no fields or edges
+      if (portal.options.team === window.TEAM_MAC) {
+        // it's a machina portal, destroy AP for both teams.
+        result.enl.AP += destroyAp;
+        result.res.AP += destroyAp;
+      }
+      // it's a neutral or machina portal, potential for both teams.
       result.enl.AP += PORTAL_FULL_DEPLOY_AP;
       result.enl.capturePortals++;
       result.res.AP += PORTAL_FULL_DEPLOY_AP;
@@ -139,10 +150,15 @@ window.plugin.compAPStats.compAPStats = function () {
     // only consider links that start/end on-screen
     var points = link.getLatLngs();
     if (displayBounds.contains(points[0]) || displayBounds.contains(points[1])) {
-      if (link.options.team === window.TEAM_ENL) {
+      if (link.options.team !== window.TEAM_RES) {
+        // res gets points if the link is not their own team.
+        // this will match if link team is ENL or MAC
         result.res.AP += window.DESTROY_LINK;
         result.res.destroyLinks++;
-      } else if (link.options.team === window.TEAM_RES) {
+      }
+      if (link.options.team !== window.TEAM_ENL ) {
+        // enl gets points if the link is not their own team.
+        // this will match if link team is RES or MAC
         result.enl.AP += window.DESTROY_LINK;
         result.enl.destroyLinks++;
       }
@@ -154,10 +170,13 @@ window.plugin.compAPStats.compAPStats = function () {
     // only consider fields with at least one vertex on screen
     var points = field.getLatLngs();
     if (displayBounds.contains(points[0]) || displayBounds.contains(points[1]) || displayBounds.contains(points[2])) {
-      if (field.options.team === window.TEAM_ENL) {
+      // Although there were no reports about machina fields yet, we'll stick to the same new logic as for links.
+      // If at some day machina dares to build fields, this will then work, too.
+      if (field.options.team !== window.TEAM_RES) {
         result.res.AP += window.DESTROY_FIELD;
         result.res.destroyFields++;
-      } else if (field.options.team === window.TEAM_RES) {
+      }
+      if (field.options.team !== window.TEAM_ENL) {
         result.enl.AP += window.DESTROY_FIELD;
         result.enl.destroyFields++;
       }
