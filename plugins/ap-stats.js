@@ -156,7 +156,7 @@ window.plugin.compAPStats.compAPStats = function () {
         result.res.AP += window.DESTROY_LINK;
         result.res.destroyLinks++;
       }
-      if (link.options.team !== window.TEAM_ENL ) {
+      if (link.options.team !== window.TEAM_ENL) {
         // enl gets points if the link is not their own team.
         // this will match if link team is RES or MAC
         result.enl.AP += window.DESTROY_LINK;
