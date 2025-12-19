@@ -132,13 +132,16 @@ window.plugin.compAPStats.compAPStats = function () {
       }
     } else if (portal.options.team === window.TEAM_MAC) {
       // it's a machina portal, destroy AP for both teams.
-      result.enl.AP += destroyAp + PORTAL_FULL_DEPLOY_AP;
-      result.res.AP += destroyAp + PORTAL_FULL_DEPLOY_AP;
+      result.enl.AP += destroyAp + PORTAL_FULL_DEPLOY_AP + window.RECLAIM_PORTAL_FROM_MACHINA;
+      result.res.AP += destroyAp + PORTAL_FULL_DEPLOY_AP + window.RECLAIM_PORTAL_FROM_MACHINA;
 
       result.enl.destroyPortals++;
       result.res.destroyPortals++;
+
+      result.enl.reclaimPortals++;
+      result.res.reclaimPortals++;
     } else {
-      // it's a neutral or machina portal, potential for both teams.
+      // it's a neutral portal, potential for both teams. by definition no fields or edges
       result.enl.AP += PORTAL_FULL_DEPLOY_AP;
       result.res.AP += PORTAL_FULL_DEPLOY_AP;
 
