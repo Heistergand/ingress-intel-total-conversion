@@ -134,13 +134,15 @@ window.plugin.compAPStats.compAPStats = function () {
       // it's a machina portal, destroy AP for both teams.
       result.enl.AP += destroyAp + PORTAL_FULL_DEPLOY_AP;
       result.res.AP += destroyAp + PORTAL_FULL_DEPLOY_AP;
-      result.res.destroyPortals++;
+
       result.enl.destroyPortals++;
+      result.res.destroyPortals++;
     } else {
       // it's a neutral or machina portal, potential for both teams.
       result.enl.AP += PORTAL_FULL_DEPLOY_AP;
-      result.enl.capturePortals++;
       result.res.AP += PORTAL_FULL_DEPLOY_AP;
+
+      result.enl.capturePortals++;
       result.res.capturePortals++;
     }
   });
