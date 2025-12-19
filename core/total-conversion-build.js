@@ -1,6 +1,6 @@
 // @author         jonatkins
 // @name           IITC: Ingress intel map total conversion
-// @version        0.41.0
+// @version        0.41.1
 // @description    Total conversion for the ingress intel map.
 // @run-at         document-end
 
@@ -16,6 +16,10 @@ window.IITC = IITC;
 
 window.script_info = plugin_info;
 window.script_info.changelog = [
+  {
+    version: '0.41.1',
+    changes: ['Update and supplement ingress constants for access points'],
+  },
   {
     version: '0.41.0',
     changes: [
