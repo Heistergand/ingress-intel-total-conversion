@@ -1,6 +1,6 @@
 // @author         jonatkins
 // @name           IITC: Ingress intel map total conversion
-// @version        0.41.0
+// @version        0.42.0
 // @description    Total conversion for the ingress intel map.
 // @run-at         document-end
 
@@ -16,6 +16,10 @@ window.IITC = IITC;
 
 window.script_info = plugin_info;
 window.script_info.changelog = [
+  {
+    version: '0.42.0',
+    changes: ['Update and supplement ingress constants for access points'],
+  },
   {
     version: '0.41.0',
     changes: [
@@ -452,7 +456,7 @@ window.DESTROY_FIELD = 750;
  * @const
  * @memberof ingress_constants
  */
-window.CAPTURE_PORTAL = 500;
+window.CAPTURE_PORTAL = 675;
 
 /**
  * AP for deploying a resonator
@@ -461,6 +465,14 @@ window.CAPTURE_PORTAL = 500;
  * @memberof ingress_constants
  */
 window.DEPLOY_RESONATOR = 125;
+
+/**
+ * AP for creating a link
+ * @type {number}
+ * @const
+ * @memberof ingress_constants
+ */
+window.CREATE_LINK = 313;
 
 /**
  * AP for deploying all resonators on portal
@@ -477,6 +489,30 @@ window.COMPLETION_BONUS = 250;
  * @memberof ingress_constants
  */
 window.UPGRADE_ANOTHERS_RESONATOR = 65;
+
+/**
+ * AP for reclaiming a machina portal
+ * @type {number}
+ * @const
+ * @memberof ingress_constants
+ */
+window.RECLAIM_PORTAL_FROM_MACHINA = 1331;
+
+/**
+ * AP for applying a portal mod
+ * @type {number}
+ * @const
+ * @memberof ingress_constants
+ */
+window.APPLY_PORTAL_MOD = 125;
+
+/**
+ * AP for destroying a portal mod
+ * @type {number}
+ * @const
+ * @memberof ingress_constants
+ */
+window.DESTROY_PORTAL_MOD = 80;
 
 /**
  * Maximum portal level.
