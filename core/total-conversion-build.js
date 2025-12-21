@@ -475,6 +475,14 @@ window.DEPLOY_RESONATOR = 125;
 window.CREATE_LINK = 313;
 
 /**
+ * AP for creating a control field
+ * @type {number}
+ * @const
+ * @memberof ingress_constants
+ */
+window.CREATE_CONTROL_FIELD = 1250;
+
+/**
  * AP for deploying all resonators on portal
  * @type {number}
  * @const
