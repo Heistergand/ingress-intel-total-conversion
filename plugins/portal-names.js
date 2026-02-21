@@ -323,7 +323,7 @@ window.plugin.portalNames.getIconAnchor = function (labelWidth) {
 };
 
 window.plugin.portalNames.getLabelBounds = function (portalPoint, size) {
-  var anchor = new L.Point(window.plugin.portalNames.getIconAnchor(size.w));
+  var anchor = L.point(window.plugin.portalNames.getIconAnchor(size.w));
   var topLeft = portalPoint.subtract(anchor);
   return new L.Bounds(topLeft, topLeft.add([size.w, size.h]));
 };
@@ -392,7 +392,7 @@ window.plugin.portalNames._getDockingPoint = function (portalPoint, labelBounds)
     }
   }
 
-  return { point: new L.Point([x, y]), edge: edge, inside: inside };
+  return { point: L.point([x, y]), edge: edge, inside: inside };
 };
 
 window.plugin.portalNames._getAlignClassByEdge = function (edge) {
@@ -456,8 +456,8 @@ window.plugin.portalNames._addLeaderLine = function (guid, portalPoint, dockPoin
   var ux = dx / dist;
   var uy = dy / dist;
 
-  var startPoint = new L.Point([portalPoint.x + ux * portalGap, portalPoint.y + uy * portalGap]);
-  var endPoint = new L.Point([dockPoint.x - ux * boxGap, dockPoint.y - uy * boxGap]);
+  var startPoint = L.point([portalPoint.x + ux * portalGap, portalPoint.y + uy * portalGap]);
+  var endPoint = L.point([dockPoint.x - ux * boxGap, dockPoint.y - uy * boxGap]);
 
   var startLatLng = window.map.unproject(startPoint);
   var endLatLng = window.map.unproject(endPoint);
