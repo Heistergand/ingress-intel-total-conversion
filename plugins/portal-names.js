@@ -5,7 +5,7 @@
 // @description    Show portal names on the map.
 
 /* exported setup, changelog --eslint */
-/* global L -- eslint */
+/* global IITC, L, $ -- eslint */
 
 var changelog = [{
     version: '0.3.0',
@@ -151,11 +151,6 @@ window.plugin.portalNames._getLineCountForHeight = function (full) {
   if (full > padY + lineH * 2 + eps) return 3;
   if (full > padY + lineH + eps) return 2;
   return 1;
-};
-
-window.plugin.portalNames._getRulerLineCount = function () {
-  var ruler = window.plugin.portalNames.ruler;
-  return window.plugin.portalNames._getLineCountForHeight(ruler.scrollHeight);
 };
 
 window.plugin.portalNames._getLabelMetrics = function (title) {
@@ -328,15 +323,15 @@ window.plugin.portalNames.getIconAnchor = function (labelWidth) {
 };
 
 window.plugin.portalNames.getLabelBounds = function (portalPoint, size) {
-  var anchor = new L.point(window.plugin.portalNames.getIconAnchor(size.w));
+  var anchor = new L.Point(window.plugin.portalNames.getIconAnchor(size.w));
   var topLeft = portalPoint.subtract(anchor);
-  return new L.bounds(topLeft, topLeft.add([size.w, size.h]));
+  return new L.Bounds(topLeft, topLeft.add([size.w, size.h]));
 };
 
 window.plugin.portalNames.getCollisionBounds = function (labelBounds, size) {
   // preserve original behavior: expand horizontally by W/2 (=> 2W total) to reduce clutter
   var padX = size.w / 2;
-  return new L.bounds(labelBounds.min.subtract([padX, 0]), labelBounds.max.add([padX, 0]));
+  return new L.Bounds(labelBounds.min.subtract([padX, 0]), labelBounds.max.add([padX, 0]));
 };
 
 window.plugin.portalNames._getDockingPoint = function (portalPoint, labelBounds) {
@@ -397,7 +392,7 @@ window.plugin.portalNames._getDockingPoint = function (portalPoint, labelBounds)
     }
   }
 
-  return { point: new L.point([x, y]), edge: edge, inside: inside };
+  return { point: new L.Point([x, y]), edge: edge, inside: inside };
 };
 
 window.plugin.portalNames._getAlignClassByEdge = function (edge) {
@@ -430,8 +425,8 @@ window.plugin.portalNames.addLabel = function (guid, latLng, size, classNames) {
   var classes = ['plugin-portal-names'];
   if (classNames && classNames.length) classes = classes.concat(classNames);
 
-  var label = new L.marker(latLng, {
-    icon: new L.divIcon({
+  var label = new L.Marker(latLng, {
+    icon: new L.DivIcon({
       className: classes.join(' '),
       iconAnchor: window.plugin.portalNames.getIconAnchor(size.w),
       iconSize: [size.w, size.h],
@@ -461,13 +456,13 @@ window.plugin.portalNames._addLeaderLine = function (guid, portalPoint, dockPoin
   var ux = dx / dist;
   var uy = dy / dist;
 
-  var startPoint = new L.point([portalPoint.x + ux * portalGap, portalPoint.y + uy * portalGap]);
-  var endPoint = new L.point([dockPoint.x - ux * boxGap, dockPoint.y - uy * boxGap]);
+  var startPoint = new L.Point([portalPoint.x + ux * portalGap, portalPoint.y + uy * portalGap]);
+  var endPoint = new L.Point([dockPoint.x - ux * boxGap, dockPoint.y - uy * boxGap]);
 
   var startLatLng = window.map.unproject(startPoint);
   var endLatLng = window.map.unproject(endPoint);
 
-  var polyline = new L.polyline([startLatLng, endLatLng], {
+  var polyline = new L.Polyline([startLatLng, endLatLng], {
     color: '#FFFFBB',
     weight: 1,
     opacity: 0.9,
@@ -494,8 +489,7 @@ window.plugin.portalNames.updatePortalLabels = function () {
 
   var portalPoints = {};
   var labelMeta = {};
-  var guid;
-
+  
   for (const guid in window.portals) {
     var p = window.portals[guid];
     if (p._map && p.options.data.title) {
