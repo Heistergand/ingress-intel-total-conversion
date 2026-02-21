@@ -7,7 +7,8 @@
 /* exported setup, changelog --eslint */
 /* global L --eslint */
 
-var changelog = [{
+var changelog = [
+  {
     version: '0.3.0',
     changes: ['Add options dialog: X/Y offset, optional leader line, optional edge highlight, updated overlap detection'],
   },
@@ -489,7 +490,7 @@ window.plugin.portalNames.updatePortalLabels = function () {
 
   var portalPoints = {};
   var labelMeta = {};
-  
+
   for (const guid in window.portals) {
     var p = window.portals[guid];
     if (p._map && p.options.data.title) {
@@ -575,7 +576,7 @@ window.plugin.portalNames.updatePortalLabels = function () {
   });
 
   // remove any not wanted
-  for (guid in window.plugin.portalNames.labelLayers) {
+  for (const guid in window.plugin.portalNames.labelLayers) {
     if (!visible[guid]) window.plugin.portalNames.removeLabel(guid);
   }
 
