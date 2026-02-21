@@ -5,7 +5,7 @@
 // @description    Show portal names on the map.
 
 /* exported setup, changelog --eslint */
-/* global IITC, L, $ -- eslint */
+/* global L --eslint */
 
 var changelog = [{
     version: '0.3.0',
