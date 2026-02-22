@@ -68,12 +68,7 @@ window.plugin.portalNames._clamp = function (value, min, max) {
 };
 
 window.plugin.portalNames._escapeHtml = function (text) {
-  return String(text)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+  return String(text).replace(/&/g,·'&amp;').replace(/</g,·'&lt;').replace(/>/g,·'&gt;').replace(/"/g,·'&quot;').replace(/'/g, '&#039;');
 };
 
 window.plugin.portalNames.loadSettings = function () {
@@ -668,20 +663,8 @@ window.plugin.portalNames.showOptionsDialog = function () {
     return { row: row, input: input };
   }
 
-  var offX = makeRowRange(
-    'Offset X (px)',
-    'portal-names-offset-x',
-    s.offsetX,
-    -window.plugin.portalNames.MAX_OFFSET_X,
-    window.plugin.portalNames.MAX_OFFSET_X
-  );
-  var offY = makeRowRange(
-    'Offset Y (px)',
-    'portal-names-offset-y',
-    s.offsetY,
-    -window.plugin.portalNames.MAX_OFFSET_Y,
-    window.plugin.portalNames.MAX_OFFSET_Y
-  );
+  var offX = makeRowRange('Offset X (px)', 'portal-names-offset-x', s.offsetX, -window.plugin.portalNames.MAX_OFFSET_X, window.plugin.portalNames.MAX_OFFSET_X);
+  var offY = makeRowRange('Offset Y (px)', 'portal-names-offset-y', s.offsetY, -window.plugin.portalNames.MAX_OFFSET_Y, window.plugin.portalNames.MAX_OFFSET_Y);
 
   div.appendChild(offX.row);
   div.appendChild(offY.row);
